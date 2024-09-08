@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة تصميم مع كاردز</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kairo&family=DGaza&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: logo;
+            src: url('alfont_com_DG-Gaza (1).ttf');
+        }
+        body {
+            font-family: "Cairo", sans-serif;
+            direction: rtl; /* جعل النص يبدأ من اليمين إلى اليسار */
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            font-family: logo;
+        }
+        .content-box {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 40px;
+            text-align: right; /* محاذاة النص لليمين */
+        }
+        .content-box img {
+            max-width: 300px; /* عرض الصورة */
+            margin-left: 50px;
+        }
+        .card {
+            border-radius: 15px;
+            max-width: 250px; /* تصغير عرض الكارد */
+        }
+        .scrollable-section {
+            max-height: 430px; /* ارتفاع الجزء القابل للتمرير */
+            overflow-y: scroll; /* تفعيل التمرير العمودي */
+            overflow-x: hidden; /* تفعيل التمرير الأفقي إذا لزم الأمر */
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 20px;
+            text-align: right; /* محاذاة النص لليمين */
+            border: rgba(128, 128, 128, 0.318) solid 2px;
+            border-radius: 10px;
+   
+        }
+        /* إخفاء شريط التمرير */
+.scrollable-section::-webkit-scrollbar {
+    display: none; /* إخفاء شريط التمرير */
+}
+        .footer {
+            text-align: center;
+            padding: 10px;
+            margin-top: 30px;
+            background-color: #1A4500;
+            color:#D9D9D9;
+            border-top: 1px solid #ccc;
+        }
+        /* زر الشات */
+        .chat-button {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background-color: #1A4500;
+            color: white;
+            border: none;
+            border-radius: 50px; /* حواف ناعمة */
+            padding: 10px 15px;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 1000; /* تأكد من ظهور الزر فوق العناصر الأخرى */
+        }
+        .chat-button:hover {
+            background-color: #3A7239; /* لون الزر عند التمرير عليه */
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header " style="padding-top: 20px;">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="logo">معًا</div>
+            <div>
+                <button class="btn btn-custom mr-2" style="background-color: #1A4500; color: white;" data-toggle="modal" data-target="#loginModal">تسجيل دخول</button>
+                <!-- بوب اب تسجيل الدخول -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">تسجيل دخول</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="loginEmail">البريد الإلكتروني أو الاسم</label>
+                        <input type="text" class="form-control" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">كلمة المرور</label>
+                        <input type="password" class="form-control" id="loginPassword" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn btn-primary">تسجيل دخول</button>
+            </div>
+        </div>
+    </div>
+</div>
+                <button class="btn btn-custom" style="background-color: #1A4500; color: white;" data-toggle="modal" data-target="#registerModal">تسجيل جديد</button>
+                <!-- بوب اب تسجيل جديد -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">تسجيل جديد</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="name">الاسم</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">رقم الجوال</label>
+                        <input type="text" class="form-control" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">كلمة المرور</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">تأكيد كلمة المرور</label>
+                        <input type="password" class="form-control" id="confirm-password" required>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="agree" required>
+                        <label class="form-check-label" for="agree">أوافق على الشروط</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn btn-primary">تسجيل</button>
+            </div>
+        </div>
+    </div>
+</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-5 ">
+        <div class="content-box"  style="background-color: #D9D9D9;">
+            <div class="text-section">
+                <h1 style="font-weight: bolder; font-size: 50px;">يدا بيد معًا لعونك</h1>
+                <p>لديك سيارة مفقودة؟ لا تتردد، أبلغنا وسنكون هنا لمساعدتك!</p>
+                <button class="btn btn-primary" style="border-radius: 10px; background-color: #1A4500; border: none;" data-toggle="modal" data-target="#reportModal">إنشاء بلاغ</button>
+            </div>
+            <img src="_2c86ea53-ad11-431a-aec9-6d8e8d2.png" alt="صورة" class="img-fluid mr-31" style="margin-right: auto ;">
+        </div>
+<!-- بوب اب إنشاء بلاغ -->
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="reportModalLabel">إنشاء بلاغ</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="carImage">صورة السيارة</label>
+                        <input type="file" class="form-control" id="carImage" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="carType">نوع السيارة</label>
+                        <input type="text" class="form-control" id="carType" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="carPlate">لوحة السيارة</label>
+                        <input type="text" class="form-control" id="carPlate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="carColor">لون السيارة</label>
+                        <input type="text" class="form-control" id="carColor" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">المكان</label>
+                        <input type="text" class="form-control" id="location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reward">هل يوجد مكافأة؟</label>
+                        <select class="form-control" id="reward" required>
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn btn-primary">إرسال البلاغ</button>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="scrollable-section">
+            <div class="row" id="card-container">
+              
+                <script>
+                    const cardContainer = document.getElementById('card-container');
+            
+                    for (let i = 0; i < 50; i++) {
+                        const cardHTML = `
+                            <div class="col-md-4 mb-4">
+                                <div class="card mx-auto">
+                                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="صورة">
+                                    <div class="card-body">
+                                        <h5 class="card-title">عنوان الكارد ${i + 1}</h5>
+                                        <p class="card-text">معلومات عن الكارد ${i + 1}.</p>
+                                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contentModal">عرض</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        cardContainer.innerHTML += cardHTML; // إضافة الكارد إلى الحاوية
+                    }
+                </script>
+        </div>
+    </div>
+ <!-- بوب أب (Modal) -->
+        <div class="modal fade" id="contentModal" tabindex="-1" role="dialog" aria-labelledby="contentModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="contentModalLabel">معلومات المكان</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body d-flex">
+                        <img src="https://via.placeholder.com/150" alt="صورة المكان" class="img-fluid mr-3">
+                        <div>
+                            <h5>اسم المكان</h5>
+                            <p>رقم اللوحة: ABC123</p>
+                            <p>معلومات أخرى حول المكان يمكن أن تضاف هنا.</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+                        <button type="button" class="btn btn-primary">أكد</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer" style="border-radius: 10px 10px 0 0;">
+        <p>حقوق النشر &copy; 2024 معًا. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <button class="chat-button">شات</button>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

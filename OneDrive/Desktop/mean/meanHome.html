@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة ويب</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+    font-family: 'Logo'; /* اسم الخط */
+    src: url('alfont_com_DG-Gaza (1).ttf');
+}
+        body {
+            background-color: #f8f9fa;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0; /* إزالة الهوامش */
+            font-family: 'Cairo', sans-serif;
+        }
+        .header {
+            background-color: #1A4500;
+            color: white;
+            padding: 15px;
+            position: relative;
+            z-index: 1; /* رفع مستوى الطبقة */
+        }
+        .sidebar {
+            background-color: #1A4500;
+            color: white;
+            padding: 15px;
+            position: fixed; /* تثبيت السايد بار */
+            height: 100%; /* ملء الفضاء العمودي */
+            overflow-y: auto; /* إضافة تمرير عمودي إذا لزم الأمر */
+            width: 250px; /* عرض ثابت للسايد بار */
+            top: 60px; /* بدء السايد بار أسفل الهيدر */
+            right: 0; /* التصاقه بالجدار الأيمن */
+            text-align: right; /* محاذاة النص إلى اليمين */
+        }
+        .content {
+            margin-right: 250px; /* ترك مساحة للسايد بار */
+            padding: 15px;
+            flex: 1; /* ملء المساحة المتبقية */
+            margin-top: 15px; /* ترك فراغ أسفل الهيدر */
+        }
+        .card {
+            border-radius: 15px;
+            max-width: 200px; /* تصغير عرض الكارد */
+        }
+        .icon {
+            margin-left: 10px; /* تعديل الهامش للجهة اليمنى */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header d-flex justify-content-between align-items-center">
+        <h1 style="font-family: Logo;">معًا</h1>
+        <div>
+            
+            <button class="btn btn-light" type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">تسجيل جديد</button>
+            <button class="btn btn-light" type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">تسجيل دخول</button>
+        </div>
+        
+    </div>
+     <!-- بوب أب (Modal) -->
+     <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">تسجيل جديد</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="username">اسم المستخدم</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">رقم الجوال</label>
+                            <input type="tel" class="form-control" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">كلمة المرور</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">تأكيد كلمة المرور</label>
+                            <input type="password" class="form-control" id="confirm-password" required>
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="terms" required>
+                            <label class="form-check-label" for="terms">أوافق على الشروط والأحكام</label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+                    <button type="button" class="btn btn-primary">تأكيد</button>
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- بوب أب (Modal) -->
+     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">تسجيل الدخول</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">كلمة المرور</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+                    <button type="button" class="btn btn-primary">تسجيل الدخول</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center welcome-section">
+                <h1 class="display-4" style="font-family: Logo;">يدا بيد معًا لعونك</h1>
+                <br>
+                <p class="lead margin-top">نحن هنا لمساعدتكم في كل ما تحتاجونه.</p>
+                <hr class="my-4">
+              
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid d-flex">
+        <div class="content">
+            <div class="row" id="card-container">
+                <!-- الكاردز ستضاف هنا بواسطة JavaScript -->
+            </div>
+        </div>
+
+        <div class="sidebar rounded">
+            <hr>
+            <h5>القائمة</h5>
+            <ul class="list-unstyled">
+                <li><i class="icon fas fa-exclamation-circle"></i> <a href="#" class="text-white">الملف الشخصي</a></li>
+<br>
+                <li><i class="icon fas fa-tracking margin-top"></i> <a href="#" class="text-white">إنشاء بلاغ</a></li>
+                <br>
+                <li><i class="icon fas fa-user margin-top"></i> <a href="#" class="text-white">تتبع البلاغ</a></li>
+                <br>
+                <li><i class="icon fas fa-comments margin-top"></i> <a href="#" class="text-white">الشات</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="text-center mt-4">
+        <p>حقوق الطبع والنشر &copy; 2024</p>
+    </footer>
+
+    <script>
+        const cardContainer = document.getElementById('card-container');
+
+        for (let i = 0; i < 14; i++) {
+            const cardHTML = `
+                <div class="col-md-4 mb-4">
+                    <div class="card mx-auto">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="صورة">
+                        <div class="card-body">
+                            <h5 class="card-title">عنوان الكارد ${i + 1}</h5>
+                            <p class="card-text">معلومات عن الكارد ${i + 1}.</p>
+                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contentModal">عرض</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            cardContainer.innerHTML += cardHTML; // إضافة الكارد إلى الحاوية
+        }
+    </script>
+        <!-- بوب أب (Modal) -->
+        <div class="modal fade" id="contentModal" tabindex="-1" role="dialog" aria-labelledby="contentModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="contentModalLabel">معلومات المكان</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body d-flex">
+                        <img src="https://via.placeholder.com/150" alt="صورة المكان" class="img-fluid mr-3">
+                        <div>
+                            <h5>اسم المكان</h5>
+                            <p>رقم اللوحة: ABC123</p>
+                            <p>معلومات أخرى حول المكان يمكن أن تضاف هنا.</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
+                        <button type="button" class="btn btn-primary">أكد</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    
+</body>
+</html>
