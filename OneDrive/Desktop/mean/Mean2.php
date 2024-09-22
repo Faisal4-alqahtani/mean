@@ -149,7 +149,7 @@
     </style>
 </head>
 <body>
-    <div class="loading" id="loading">جاري التحميل...</div>
+   <div class=loading id=loading>جاري التحميل...</div>
     <header class="header" style="padding-top: 20px;">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="logo">معًا</div>
@@ -166,7 +166,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form id="loginForm"  method="POST">
+                                <form id="loginForm" method="POST">
                                     <div class="form-group">
                                         <label for="loginEmail">البريد الإلكتروني أو الاسم</label>
                                         <input type="text" class="form-control" id="loginEmail" name="loginEmail" required>
@@ -180,14 +180,20 @@
                             <div class="modal-footer">
                                 <button type="submit" name="loginSubmit" class="btn btn-primary" onclick="performLogin()">تسجيل الدخول</button>
                             </form>
-                            <?php
-session_start(); // بدء جلسة جديدة
+                          
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    <?php 
 
 // إعداد معلومات الاتصال بقاعدة البيانات
 $servername = "localhost";
 $username = "root"; // أو أي مستخدم آخر لديك
 $password = ""; // كلمة المرور الخاصة بك
-$dbname = "my_database";
+$dbname = "mean_r";
 
 // إنشاء اتصال بقاعدة البيانات
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -202,39 +208,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['loginSubmit'])) {
     $loginEmail = $_POST['loginEmail'];
     $loginPassword = $_POST['loginPassword'];
 
-    // استخدام Prepared Statements لتفادي هجمات SQL Injection
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username=? OR email=?");
-    $stmt->bind_param("ss", $loginEmail, $loginEmail); // ربط المتغيرات
-    $stmt->execute();
-    $result = $stmt->get_result();
+    
 
-    // التحقق من وجود المستخدم
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
+    
         // التحقق من كلمة المرور
-        if (password_verify($loginPassword, $row['password'])) {
+        if (password_verify($loginPassword, @$row['password'])) {
             $_SESSION['username'] = $row['username']; // حفظ اسم المستخدم في الجلسة
             echo "تم تسجيل الدخول بنجاح! مرحباً، " . htmlspecialchars($row['username']);
-            echo"";
+           echo " <script>
+        function performLogin() {
+            // إغلاق البوب آب
+            $('#loginModal').modal('hide');
+    
+            // إظهار شاشة التحميل
+            document.getElementById('loading').style.display = 'flex';
+    
+            // الانتقال بعد فترة قصيرة لمحاكاة التحميل
+            setTimeout(() => {
+                window.location.href = 'mean-Home.html'; // انتقل إلى الصفحة المطلوبة
+            }, 4000); // 1 ثانية
+        }
+    
+        function performRegister() {
+            // إغلاق البوب آب تسجيل جديد
+            $('#registerModal').modal('hide');
+    
+            // إظهار شاشة التحميل
+            document.getElementById('loading').style.display = 'flex';
+    
+            // الانتقال بعد فترة قصيرة لمحاكاة التحميل
+            setTimeout(() => {
+                // هنا يمكنك إضافة الكود الخاص بالتسجيل في قاعدة البيانات
+                window.location.href = 'mean-Home.html'; // انتقل إلى الصفحة المطلوبة
+            }, 1000); // 1 ثانية
+        }
+    </script>";
+		  
         } else {
-            echo "كلمة المرور غير صحيحة.";
+echo '<script>
+window.alert(كلمة المرور غير صحيحة.);
+</script>'; 
+		 
         }
     } else {
-        echo "لا يوجد مستخدم بهذا البريد الإلكتروني أو الاسم.";
+                                            echo '<script>
+window.alert(لا يوجد مستخدم بهذا البريد الإلكتروني أو الاسم.);
+</script>'; 
+		
     }
 
-    $stmt->close(); // إغلاق البيان
-}
+    
+
 
 $conn->close(); // إغلاق الاتصال بقاعدة البيانات
 ?>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
                 <button class="btn btn-custom" style="background-color: #1A4500; color: white;" data-toggle="modal" data-target="#registerModal">تسجيل جديد</button>
                 <!-- بوب اب تسجيل جديد -->
                 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
@@ -248,7 +275,7 @@ $conn->close(); // إغلاق الاتصال بقاعدة البيانات
                              
                             </div>
                             <div class="modal-body">
-                                <form id="registerForm"  method="POST">
+                                <form id="registerForm" method="POST">
                                     <div class="form-group">
                                         <label for="name">الاسم</label>
                                         <input type="text" class="form-control" id="name" name="name" required>
@@ -279,7 +306,17 @@ $conn->close(); // إغلاق الاتصال بقاعدة البيانات
                                 <button type="submit" name="submit" class="btn btn-primary">تسجيل</button>
                                 
                             </form>
-                            <?php
+                         
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+	</header>
+	<?php
                             // إعداد الاتصال بقاعدة البيانات
                             $servername = "localhost"; // أو عنوان السيرفر الخاص بك
                             $username = "root"; // اسم المستخدم لقاعدة البيانات
@@ -315,7 +352,11 @@ $conn->close(); // إغلاق الاتصال بقاعدة البيانات
                             
                                 // التحقق من أن البريد الإلكتروني المدخل صالح
                                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                                    die("البريد الإلكتروني المدخل غير صالح.");
+                                    echo '<script>
+window.alert(البريد الإلكتروني المدخل غير صالح.);
+</script>'; 
+								  
+								  
                                 }
                             
                                 // التحقق من عدم تكرار البريد الإلكتروني ورقم الهاتف
@@ -323,14 +364,20 @@ $conn->close(); // إغلاق الاتصال بقاعدة البيانات
                                 $resultEmail = $conn->query($checkEmail);
                             
                                 if ($resultEmail->num_rows > 0) {
-                                    die("البريد الإلكتروني مستخدم بالفعل.");
+                                                                echo '<script>
+window.alert(البريد الإلكتروني مستخدم بالفعل.);
+</script>'; 
+								  
                                 }
                             
                                 $checkPhone = "SELECT * FROM users WHERE phone='$phone'";
                                 $resultPhone = $conn->query($checkPhone);
                             
                                 if ($resultPhone->num_rows > 0) {
-                                    die("رقم الهاتف مستخدم بالفعل.");
+                                    echo '<script>
+window.alert(رقم الهاتف مستخدم بالفعل.);
+</script>';
+								   
                                 }
                             
                                 // تشفير كلمة المرور
@@ -340,7 +387,10 @@ $conn->close(); // إغلاق الاتصال بقاعدة البيانات
                                 $sql = "INSERT INTO users (name, email, phone, password) VALUES ('$name', '$email', '$phone', '$hashed_password')";
                             
                                 if ($conn->query($sql) === TRUE) {
-                                    echo "تم تسجيل البيانات بنجاح.";
+                                   echo '<script>
+window.alert(تم تسجيل البيانات بنجاح.);
+</script>';
+								   
                                 } else {
                                     echo "خطأ: " . $sql . "<br>" . $conn->error;
                                 }
@@ -349,42 +399,7 @@ $conn->close(); // إغلاق الاتصال بقاعدة البيانات
                             // إغلاق الاتصال
                             $conn->close();
                             ?>
-
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <script>
-        function performLogin() {
-            // إغلاق البوب آب
-            $('#loginModal').modal('hide');
-    
-            // إظهار شاشة التحميل
-            document.getElementById('loading').style.display = 'flex';
-    
-            // الانتقال بعد فترة قصيرة لمحاكاة التحميل
-            setTimeout(() => {
-                window.location.href = 'mean-Home.html'; // انتقل إلى الصفحة المطلوبة
-            }, 4000); // 1 ثانية
-        }
-    
-        function performRegister() {
-            // إغلاق البوب آب تسجيل جديد
-            $('#registerModal').modal('hide');
-    
-            // إظهار شاشة التحميل
-            document.getElementById('loading').style.display = 'flex';
-    
-            // الانتقال بعد فترة قصيرة لمحاكاة التحميل
-            setTimeout(() => {
-                // هنا يمكنك إضافة الكود الخاص بالتسجيل في قاعدة البيانات
-                window.location.href = 'mean-Home.html'; // انتقل إلى الصفحة المطلوبة
-            }, 1000); // 1 ثانية
-        }
-    </script>
+   
 
     <div class="container mt-5 ">
         <div class="content-box"  style="background-color: #D9D9D9;">
@@ -443,18 +458,25 @@ $conn->close(); // إغلاق الاتصال بقاعدة البيانات
         </div>
     </div>
 </div>
+
         <div class="scrollable-section">
             <div class="row" id="card-container">
-                <?php
+ 
+
+
+
+              
+              <?php
 // إعداد الاتصال بقاعدة البيانات
-$servername = "localhost"; // أو أي خادم آخر
-$username = "root"; // اسم المستخدم
-$password = ""; // كلمة المرور
-$dbname = "mean_r"; // اسم قاعدة البيانات
+$servername = "localhost"; 
+$username = "root"; 
+$password = ""; 
+$dbname = "mean_r"; 
+
 
 // إنشاء الاتصال
 $conn = new mysqli($servername, $username, $password, $dbname);
-
+$conn->set_charset("utf8mb4");
 // التحقق من الاتصال
 if ($conn->connect_error) {
     die("فشل الاتصال: " . $conn->connect_error);
@@ -463,35 +485,38 @@ if ($conn->connect_error) {
 // استعلام لجلب البيانات
 $sql = "SELECT * FROM reports";
 $result = $conn->query($sql);
+
+// التحقق مما إذا كانت هناك نتائج
+if ($result->num_rows > 0) {
+    echo '<div class="row">'; // بدء صف Bootstrap
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="col-md-4 mb-4">';
+        echo '<div class="card mx-auto">';
+        echo '<img src="' . $row['car_image'] . '" class="card-img-top" alt="صورة السيارة">';
+        echo '<div class="card-body">';
+        echo '<h5 class="card-title">' . htmlspecialchars($row['car_type']) . '</h5>';
+        echo 'الموقع: ' . htmlspecialchars($row['location']) . '<br>';
+        echo 'المكافأة: ' . htmlspecialchars($row['reward']) . '<br>';
+        echo 'تاريخ الإنشاء: ' . htmlspecialchars($row['created_at']) . '</p>';
+        echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contentModal" disabled>عرض</button>';
+        echo '</div>'; // نهاية card-body
+        echo '</div>'; // نهاية card
+        echo '</div>'; // نهاية col-md-4
+    }
+    echo '</div>'; // نهاية row
+} else {
+    echo "لا توجد تقارير.";
+}
+
+// إغلاق الاتصال
+$conn->close();
 ?>
 
-              
-                <script>
-                    const cardContainer = document.getElementById('card-container');
-            
-                    for (let i = 0; i < 50; i++) {
-                        const cardHTML = `
-                            <div class="col-md-4 mb-4">
-                                <div class="card mx-auto">
-                                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="صورة">
-                                    <div class="card-body">
-                                        <h5 class="card-title">عنوان الكارد ${i + 1}</h5>
-                                        <p class="card-text">معلومات عن الكارد ${i + 1}.</p>
-                                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contentModal" disabled>عرض</button>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        cardContainer.innerHTML += cardHTML; // إضافة الكارد إلى الحاوية
-                    }
-                </script> 
             
                 
         </div>
     </div>
 </div>
-</div>
-
     <footer class="footer" style="border-radius: 10px 10px 0 0;">
         <p>حقوق النشر &copy; 2024 معًا. جميع الحقوق محفوظة.</p>
     </footer>
@@ -561,10 +586,11 @@ $result = $conn->query($sql);
             }
         }
     </script>
-    
-
+   
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+   
 </body>
 </html>
