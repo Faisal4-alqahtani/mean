@@ -162,8 +162,8 @@
              
 <!-- نافذة منبثقة -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog" role="document" >
+        <div class="modal-content" style="padding-right: 20px; padding-left: 20px;">
             <div class="modal-header">
                 <h5 class="modal-title" id="myModalLabel">إدخال البيانات</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -190,49 +190,65 @@
                 <button type="button" class="btn btn-success" onclick="addData()">تعديل</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">تسجيل الخروج</button>
             </div>
-            <hr>
+            
             <div class="modal-body">
-                <table class="table table-bordered mt-3" id="dataTable">
-                    <thead>
-                        <tr>
-                            <th>الاسم</th>
-                            <th>البريد الإلكتروني</th>
-                            <th>اسم المستخدم</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <script>
-                            // تكرار الصفوف 7 مرات
-                            for (let i = 1; i <= 7; i++) {
-                                const tr = document.createElement('tr'); // إنشاء عنصر <tr>
-                        
-                                // إنشاء خلايا <td>
-                                const tdName = document.createElement('td');
-                                tdName.textContent = `الاسم ${i}`; // تعيين نص الاسم
-                        
-                                const tdEmail = document.createElement('td');
-                                tdEmail.textContent = `email${i}@example.com`; // تعيين نص البريد الإلكتروني
-                        
-                                const tdUsername = document.createElement('td');
-                                tdUsername.textContent = `user${i}`; // تعيين نص اسم المستخدم
-                        
-                                // إضافة خلايا <td> إلى <tr>
-                                tr.appendChild(tdName);
-                                tr.appendChild(tdEmail);
-                                tr.appendChild(tdUsername);
-                        
-                                // إضافة <tr> إلى <tbody>
-                                document.getElementById('tableBody').appendChild(tr);
-                            }
-                        </script>
-                    </tbody>
-                </table>
+                <div style="max-height: 200px; overflow-y: auto;"> <!-- إضافة سكرول هنا -->
+                    <table class="table table-bordered mt-3" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>الاسم</th>
+                                <th>البريد الإلكتروني</th>
+                                <th>اسم المستخدم</th>
+                                <th>الحالة</th> <!-- عمود الحالة -->
+                                <th>إجراء</th> <!-- عمود الإجراءات -->
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <script>
+                                // تكرار الصفوف 7 مرات
+                                for (let i = 1; i <= 7; i++) {
+                                    const tr = document.createElement('tr'); // إنشاء عنصر <tr>
+                            
+                                    // إنشاء خلايا <td>
+                                    const tdName = document.createElement('td');
+                                    tdName.textContent = `الاسم ${i}`; // تعيين نص الاسم
+                            
+                                    const tdEmail = document.createElement('td');
+                                    tdEmail.textContent = `email${i}@example.com`; // تعيين نص البريد الإلكتروني
+                            
+                                    const tdUsername = document.createElement('td');
+                                    tdUsername.textContent = `user${i}`; // تعيين نص اسم المستخدم
+
+                                    const tdStatus = document.createElement('td');
+                                    tdStatus.textContent = `نشط`; // تعيين نص الحالة
+                            
+                                    const tdAction = document.createElement('td');
+                                    const deleteButton = document.createElement('button');
+                                    deleteButton.textContent = 'حذف'; // نص زر الحذف
+                                    deleteButton.className = 'btn btn-danger btn-sm'; // تنسيق الزر
+                                    deleteButton.onclick = function() {
+                                        tr.remove(); // إزالة الصف عند الضغط على زر الحذف
+                                    };
+                                    tdAction.appendChild(deleteButton); // إضافة الزر إلى عمود الإجراءات
+
+                                    // إضافة خلايا <td> إلى <tr>
+                                    tr.appendChild(tdName);
+                                    tr.appendChild(tdEmail);
+                                    tr.appendChild(tdUsername);
+                                    tr.appendChild(tdStatus);
+                                    tr.appendChild(tdAction);
+                            
+                                    // إضافة <tr> إلى <tbody>
+                                    document.getElementById('tableBody').appendChild(tr);
+                                }
+                            </script>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
-            </div>
-        </div>
     </header>
 
     <div class="container mt-5 ">

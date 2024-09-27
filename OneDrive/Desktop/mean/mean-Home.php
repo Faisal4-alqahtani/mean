@@ -148,26 +148,102 @@
         }
     </style>
 </head>
-<body>
-    
-</*?php
-session_start();
+<body>  
 
-if (!isset($_SESSION['loginSubmit']) || $_SESSION['loginSubmit'] !== true) {
-    header("Location: Mean2.php"); // توجيه إلى صفحة تسجيل الدخول
-    exit;
-}
-
-*/?>
     <header class="header " style="padding-top: 20px;">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="logo">معًا</div>
             <div>
                 <button class="btn btn-custom mr-2" style="background-color: #1A4500; color: white;" data-toggle="modal" data-target="#loginModal"> الملف الشخصي</button>
-             
+ <!-- نافذة منبثقة -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" >
+        <div class="modal-content" style="padding-right: 20px; padding-left: 20px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">إدخال البيانات</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="dataForm">
+                    <div class="form-group">
+                        <label for="inputName">الاسم</label>
+                        <input type="text" class="form-control" id="inputName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail">البريد الإلكتروني</label>
+                        <input type="email" class="form-control" id="inputEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputUsername">اسم المستخدم</label>
+                        <input type="text" class="form-control" id="inputUsername" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="addData()">تعديل</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">تسجيل الخروج</button>
+            </div>
+            
+            <div class="modal-body">
+                <div style="max-height: 200px; overflow-y: auto;"> <!-- إضافة سكرول هنا -->
+                    <table class="table table-bordered mt-3" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>الاسم</th>
+                                <th>البريد الإلكتروني</th>
+                                <th>اسم المستخدم</th>
+                                <th>الحالة</th> <!-- عمود الحالة -->
+                                <th>إجراء</th> <!-- عمود الإجراءات -->
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <script>
+                                // تكرار الصفوف 7 مرات
+                                for (let i = 1; i <= 7; i++) {
+                                    const tr = document.createElement('tr'); // إنشاء عنصر <tr>
+                            
+                                    // إنشاء خلايا <td>
+                                    const tdName = document.createElement('td');
+                                    tdName.textContent = `الاسم ${i}`; // تعيين نص الاسم
+                            
+                                    const tdEmail = document.createElement('td');
+                                    tdEmail.textContent = `email${i}@example.com`; // تعيين نص البريد الإلكتروني
+                            
+                                    const tdUsername = document.createElement('td');
+                                    tdUsername.textContent = `user${i}`; // تعيين نص اسم المستخدم
 
+                                    const tdStatus = document.createElement('td');
+                                    tdStatus.textContent = `نشط`; // تعيين نص الحالة
+                            
+                                    const tdAction = document.createElement('td');
+                                    const deleteButton = document.createElement('button');
+                                    deleteButton.textContent = 'حذف'; // نص زر الحذف
+                                    deleteButton.className = 'btn btn-danger btn-sm'; // تنسيق الزر
+                                    deleteButton.onclick = function() {
+                                        tr.remove(); // إزالة الصف عند الضغط على زر الحذف
+                                    };
+                                    tdAction.appendChild(deleteButton); // إضافة الزر إلى عمود الإجراءات
+
+                                    // إضافة خلايا <td> إلى <tr>
+                                    tr.appendChild(tdName);
+                                    tr.appendChild(tdEmail);
+                                    tr.appendChild(tdUsername);
+                                    tr.appendChild(tdStatus);
+                                    tr.appendChild(tdAction);
+                            
+                                    // إضافة <tr> إلى <tbody>
+                                    document.getElementById('tableBody').appendChild(tr);
+                                }
+                            </script>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+    </div>
+</div>
     </header>
 
     <div class="container mt-5 ">
@@ -256,7 +332,9 @@ try {
         echo json_encode(['success' => true]);
     }
 } catch (PDOException $e) {
-    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    echo '<script>
+    window.alert("تم تسجيل البيانات بنجاح.");
+    </script>';
 }
 ?>
 

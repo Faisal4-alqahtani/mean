@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم الإدارة</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #28a745; /* لون أخضر */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+        .sidebar {
+            position: fixed;
+            top: 80px; /* تقليل المسافة من الأعلى */
+            right: 0;
+            height: calc(100% - 80px); /* تعديل الارتفاع */
+            width: 220px;
+            background-color: #28a745; /* خلفية جانبية خضراء */
+            padding: 15px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 10px;
+            z-index: 1000;
+            margin-top: 20px;
+        }
+        .sidebar h4, .sidebar a {
+            color: white;
+        }
+        .sidebar a {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #007BFF; /* لون أزرار القائمة */
+            transition: background-color 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #0056b3; /* لون عند التمرير */
+        }
+        .logout-btn {
+            background-color: #dc3545; /* لون أحمر */
+        }
+        .logout-btn:hover {
+            background-color: #c82333; /* لون أحمر عند التمرير */
+        }
+        .card {
+            margin: 10px;
+            border-radius: 10px;
+        }
+        .table-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .content {
+            margin-right: 240px; /* المسافة المخصصة لشريط الجانبي */
+            padding: 20px;
+        }
+        .modal-header {
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>لوحة التحكم</h1>
+    </div>
+
+    <div class="sidebar">
+        <h4>القائمة</h4>
+        <a href="#" class="info-btn">المعلومات الشخصية</a>
+        <button class="btn btn-primary mb-2" id="showChartModal" style="width: 100%;">عرض الرسم البياني</button>
+        <a href="#" class="main-page-btn">الصفحة الرئيسية</a>
+        <a href="#" class="logout-btn">تسجيل الخروج</a>
+    </div>
+
+    <div class="content">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-center bg-light">
+                    <div class="card-body">
+                        <h2><i class="fas fa-check-circle"></i> البلاغات المنجزة</h2>
+                        <p id="completed-report-count">25</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center bg-light">
+                    <div class="card-body">
+                        <h2><i class="fas fa-flag"></i> عدد البلاغات</h2>
+                        <p id="report-count">30</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center bg-light">
+                    <div class="card-body">
+                        <h2><i class="fas fa-users"></i> عدد المستخدمين</h2>
+                        <p id="user-count">150</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-container mt-4">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>الاسم</th>
+                        <th>البريد الإلكتروني</th>
+                        <th>تاريخ التسجيل</th>
+                        <th>إجراء</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>محمد أحمد</td>
+                        <td>mohamed@example.com</td>
+                        <td>01-01-2023</td>
+                        <td>
+                            <button class="btn btn-info btn-sm show-details">عرض المزيد</button>
+                            <button class="btn btn-danger btn-sm">حذف</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>علي حسن</td>
+                        <td>ali@example.com</td>
+                        <td>15-02-2023</td>
+                        <td>
+                            <button class="btn btn-info btn-sm show-details">عرض المزيد</button>
+                            <button class="btn btn-danger btn-sm">حذف</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>سميرة علي</td>
+                        <td>samira@example.com</td>
+                        <td>20-03-2023</td>
+                        <td>
+                            <button class="btn btn-info btn-sm show-details">عرض المزيد</button>
+                            <button class="btn btn-danger btn-sm">حذف</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>يوسف محمد</td>
+                        <td>yousef@example.com</td>
+                        <td>25-04-2023</td>
+                        <td>
+                            <button class="btn btn-info btn-sm show-details">عرض المزيد</button>
+                            <button class="btn btn-danger btn-sm">حذف</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ليلى زين</td>
+                        <td>leila@example.com</td>
+                        <td>10-05-2023</td>
+                        <td>
+                            <button class="btn btn-info btn-sm show-details">عرض المزيد</button>
+                            <button class="btn btn-danger btn-sm">حذف</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>عائشة علي</td>
+                        <td>aisha@example.com</td>
+                        <td>12-06-2023</td>
+                        <td>
+                            <button class="btn btn-info btn-sm show-details">عرض المزيد</button>
+                            <button class="btn btn-danger btn-sm">حذف</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>خالد سعيد</td>
+                        <td>khaled@example.com</td>
+                        <td>15-07-2023</td>
+                        <td>
+                            <button class="btn btn-info btn-sm show-details">عرض المزيد</button>
+                            <button class="btn btn-danger btn-sm">حذف</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>فاطمة حسن</td>
+                        <td>fatima@example.com</td>
+                        <td>20-08-2023</td>
+                        <td>
+                            <button class="btn btn-info btn-sm show-details">عرض المزيد</button>
+                            <button class="btn btn-danger btn-sm">حذف</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>سليمان علي</td>
+                        <td>suleiman@example.com</td>
+                        <td>25-09-2023</td>
+                        <td>
+                            <button class="btn btn-info btn-sm show-details">عرض المزيد</button>
+                            <button class="btn btn-danger btn-sm">حذف</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>نور زين</td>
+                        <td>noor@example.com</td>
+                        <td>30-10-2023</td>
+                        <td>
+                            <button class="btn btn-info btn-sm show-details">عرض المزيد</button>
+                            <button class="btn btn-danger btn-sm">حذف</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- بوب أب للرسم البياني -->
+    <div class="modal fade" id="chartModal" tabindex="-1" role="dialog" aria-labelledby="chartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="chartModalLabel">الرسم البياني</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <canvas id="modalChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- بوب أب لعرض التفاصيل -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">تفاصيل المستخدم</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="userDetails">تفاصيل المستخدم هنا.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // إعداد الرسم البياني في البوب أب
+        document.getElementById('showChartModal').onclick = function() {
+            const modalCtx = document.getElementById('modalChart').getContext('2d');
+            const modalChart = new Chart(modalCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['مستخدمين', 'بلاغات', 'بلاغات منجزة', 'بلاغات معلقة'],
+                    datasets: [{
+                        label: 'الإحصائيات',
+                        data: [150, 30, 25, 5],
+                        backgroundColor: [
+                            'rgba(40, 167, 69, 0.2)',
+                            'rgba(255, 193, 7, 0.2)',
+                            'rgba(23, 162, 184, 0.2)',
+                            'rgba(220, 53, 69, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(40, 167, 69, 1)',
+                            'rgba(255, 193, 7, 1)',
+                            'rgba(23, 162, 184, 1)',
+                            'rgba(220, 53, 69, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            $('#chartModal').modal('show'); // عرض البوب أب
+        };
+
+        // إعداد بوب أب عرض التفاصيل
+        $(document).on('click', '.show-details', function() {
+            const row = $(this).closest('tr');
+            const name = row.find('td').eq(0).text();
+            const email = row.find('td').eq(1).text();
+            const registrationDate = row.find('td').eq(2).text();
+            const details = `الاسم: ${name}<br>البريد الإلكتروني: ${email}<br>تاريخ التسجيل: ${registrationDate}`;
+            $('#userDetails').html(details);
+            $('#detailsModal').modal('show'); // عرض بوب أب التفاصيل
+        });
+    </script>
+</body>
+</html>
