@@ -1,4 +1,4 @@
-# Ma’an Platform (منصة معاً) 🚗🛡️
+# Ma’an Platform (منصة معاً) 🚗
 
 > A unified digital platform designed to streamline vehicle-related reporting, reducing misinformation and enhancing public awareness through secure and verified reporting mechanisms.
 
@@ -23,11 +23,7 @@ Inundating social media with unverified vehicle reports leads to information clu
 - **Database:** **MySQL** (Structured Data Management for Reports & Users).
 - **APIs:** Integration of Location Services and Verification APIs.
 
-## 📸 Platform Preview
-*(Note: Add your project screenshots or GIFs here to showcase the UI/UX)*
-| Verified Report Entry | Real-time Tracking | Awareness Dashboard |
-| :---: | :---: | :---: |
-| ![Entry](https://via.placeholder.com) | ![Tracking](https://via.placeholder.com) | ![Dashboard](https://via.placeholder.com) |
+
 
 ## ⚙️ Installation & Setup
 1. **Clone the repository:**
